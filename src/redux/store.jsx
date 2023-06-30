@@ -12,7 +12,6 @@ const persistConfig = {
 
 const expenseReducer = combineReducers({ transactions: expenseSlice });
 
-
 const persistedReducer = persistReducer(persistConfig, expenseReducer)
 
 

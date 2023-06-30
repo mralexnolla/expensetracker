@@ -1,29 +1,38 @@
 import { useState } from "react";
-import { createTransaction } from "../redux/slice";
+
+import {v4 as uuid} from "uuid";
 import { useDispatch } from "react-redux";
-import { v4 as uuid } from "uuid";
+import { addtransactions } from "../redux/slice";
+
 
 const AddTransaction = () => {
-  const [text, setText] = useState("");
-  const [amount, setAmount] = useState("");
-  const [err, setErr] = useState("")
-  
+  const[amount, setAmount]= useState("")
+  const[text, setText] = useState ("")
+  const[error, setError] = useState("")
+
 
   const dispatch = useDispatch();
 
   const handleSave = (e) => {
     e.preventDefault();
-    if (text.trim() === "" || amount.trim() === "") {
-      setErr("field cannot be empty");
-      return;
+
+
+    if(text.trim() === "" || amount.trim() === "" ){
+      setError('Feild cannot be empty')
+      return 
     }
-    const newTxn = { id: uuid(), text, amount };
-    dispatch(createTransaction(newTxn));
-    setText("");
-    setAmount("");
-    setErr("");
-    
-  };
+
+    const newadd ={id:uuid(), text,  amount}
+
+    dispatch(addtransactions(newadd))
+    setAmount('');
+    setText('');
+    setError("")
+  }
+
+
+ 
+
 
   return (
     <div>
@@ -31,34 +40,21 @@ const AddTransaction = () => {
       <form>
         <div className="form-control">
           <label htmlFor="text">Text</label>
-          <input
-            type="text"
-            placeholder="Enter text..."
-            name="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            required
-          />
-         
+          <input type="text" name="text" value={text} placeholder="Enter text..." onChange={(e)=>setText(e.target.value) }/>
+
         </div>
         <div className="form-control">
           <label htmlFor="amount">
             Amount <br />
             (negative - expense, positive - income)
           </label>
-          <input
-            type="number"
-            placeholder="Enter amount..."
-            name="amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
-          <h3 style= {{color: "red"}}>{err}</h3> 
+          <input type="number" name="amount"  value={amount} placeholder="Enter amount..." onChange ={(e) => setAmount(e.target.value)} />
         </div>
-        <button className="btn" onClick={handleSave}>
-          Add transaction
-        </button>
+           
+              <h3 style={{color: "red"}}>{error}</h3>
+           
+          <button className="btn" onClick={handleSave}> Add transaction</button>
+
       </form>
     </div>
   );
