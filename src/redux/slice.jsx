@@ -1,20 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  expenses: 0,
+  transactions: [
+  {id: 1, text: "Salary", amount: 10000},
+  {id: 2, text: "Rent", amount: -1000},
+],
+   
 };
 
 export const expenseSlice = createSlice({
   name: "expense",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.expenses += 1;
+
+    deletetrans:(state, {payload}) =>{
+      state.transactions = state.transactions.filter((transaction) => transaction.id !== payload);
     },
+
+    addtransactions:(state, {payload}) =>{
+      state.transactions.push(payload);
+    }
+    
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment } = expenseSlice.actions;
+export const { addtransactions , deletetrans} = expenseSlice.actions;
 
 export default expenseSlice.reducer;
