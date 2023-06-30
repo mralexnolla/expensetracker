@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-key */
-
+<
 import {useSelector} from 'react-redux'
 import Transtails from './Transtails'
 

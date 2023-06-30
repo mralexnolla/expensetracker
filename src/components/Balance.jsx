@@ -1,6 +1,4 @@
-import {useSelector} from 'react-redux'
-
-const Balance = () => {
+onst Balance = () => {
 
   const balance = useSelector((store) => store.transactions.transactions)
   .map(transaction => transaction.amount)

@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {v4 as uuid} from "uuid";
 import { useDispatch } from "react-redux";
 import { addtransactions } from "../redux/slice";
@@ -9,10 +10,12 @@ const AddTransaction = () => {
   const[text, setText] = useState ("")
   const[error, setError] = useState("")
 
+
   const dispatch = useDispatch();
 
   const handleSave = (e) => {
     e.preventDefault();
+
 
     if(text.trim() === "" || amount.trim() === "" ){
       setError('Feild cannot be empty')
@@ -30,6 +33,7 @@ const AddTransaction = () => {
 
  
 
+
   return (
     <div>
       <h3>Add new transaction</h3>
@@ -37,6 +41,7 @@ const AddTransaction = () => {
         <div className="form-control">
           <label htmlFor="text">Text</label>
           <input type="text" name="text" value={text} placeholder="Enter text..." onChange={(e)=>setText(e.target.value) }/>
+
         </div>
         <div className="form-control">
           <label htmlFor="amount">
@@ -49,9 +54,10 @@ const AddTransaction = () => {
               <h3 style={{color: "red"}}>{error}</h3>
            
           <button className="btn" onClick={handleSave}> Add transaction</button>
+
       </form>
     </div>
   );
-}
+};
 
-export default AddTransaction
+export default AddTransaction;
